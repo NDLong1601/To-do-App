@@ -165,7 +165,7 @@ class _DemoWdiget2State extends State<DemoWdiget2> {
         onTap: () {
           Navigator.pop(context);
         },
-        child: Center(child: Text('This is a stateful widget')),
+        child: Center(child: Text('This ')),
       ),
     );
   }
