@@ -16,13 +16,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: false,
       ),
-      home: SplashScense(),
+      home: SplashScreen(),
     );
   }
 }
 
-class SplashScense extends StatelessWidget {
-  const SplashScense({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +89,7 @@ class SplashScense extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                        builder: (context) => RegistrationScense()),
+                        builder: (context) => RegistrationScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -115,8 +115,8 @@ class SplashScense extends StatelessWidget {
   }
 }
 
-class RegistrationScense extends StatelessWidget {
-  const RegistrationScense({super.key});
+class RegistrationScreen extends StatelessWidget {
+  const RegistrationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -231,7 +231,7 @@ class RegistrationScense extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute<void>(
-                        builder: (context) => DashboardScense()),
+                        builder: (context) => DashboardScreen()),
                   );
                 },
                 style: ElevatedButton.styleFrom(
@@ -266,7 +266,7 @@ class RegistrationScense extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute<void>(
-                          builder: (context) => SignInScense()),
+                          builder: (context) => SignInScreen()),
                     );
                   },
                   child: Text(
@@ -286,8 +286,8 @@ class RegistrationScense extends StatelessWidget {
   }
 }
 
-class SignInScense extends StatelessWidget {
-  const SignInScense({super.key});
+class SignInScreen extends StatelessWidget {
+  const SignInScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -295,8 +295,8 @@ class SignInScense extends StatelessWidget {
   }
 }
 
-class DashboardScense extends StatelessWidget {
-  const DashboardScense({super.key});
+class DashboardScreen extends StatelessWidget {
+  const DashboardScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
