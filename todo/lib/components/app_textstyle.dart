@@ -14,6 +14,13 @@ class AppTextstyle {
     color: AppColors.black.withValues(alpha: 0.75),
   );
 
+  static TextStyle boldTsSize12Black = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 12,
+    fontWeight: FontWeight.w600,
+    color: AppColors.black.withValues(alpha: 0.75),
+  );
+
   static TextStyle regularTsSize13Black = TextStyle(
     fontFamily: 'Poppins',
     fontSize: 13,
@@ -33,5 +40,19 @@ class AppTextstyle {
     fontSize: 14,
     fontWeight: FontWeight.w400,
     color: AppColors.black.withValues(alpha: 0.75),
+  );
+
+  static TextStyle regularTsSize16lightBlue = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    color: AppColors.lightBlue,
+  );
+
+  static TextStyle boldTsSize18White = TextStyle(
+    fontFamily: 'Poppins',
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: AppColors.white,
   );
 }

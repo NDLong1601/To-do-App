@@ -62,29 +62,6 @@ class RegistrationScreen extends StatelessWidget {
               },
             ),
             SizedBox(height: 23),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.center,
-            //   children: [
-            //     AppText(
-            //       title: 'Already have an account? ',
-            //       style: AppTextstyle.regularTsSize14Black,
-            //     ),
-            //     TextButton(
-            //       onPressed: () {
-            //         Navigator.of(context).push(
-            //           MaterialPageRoute<void>(
-            //               builder: (context) => SignInScreen()),
-            //         );
-            //       },
-            //       child: AppText(
-            //         title: 'Sign In',
-            //         style: AppTextstyle.semiBoldTsSize14Black.copyWith(
-            //           color: AppColors.lightBlue,
-            //         ),
-            //       ),
-            //     ),
-            //   ],
-            // ),
             Text.rich(
               TextSpan(
                 children: [
