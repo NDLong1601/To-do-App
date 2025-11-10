@@ -26,24 +26,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
   }
 
   final TextEditingController _taskController = TextEditingController();
-  final List<String> tasks = [
-    'Cook Rice and Chicken at 10 a.m',
-    'Learn Reactjs at 12 p.m',
-    'Have Launch at 1 p.m',
-    'Learn HTML and CSS at 3 p.m',
-    'Have dinner at 7 p.m',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    _checked = List<bool>.filled(tasks.length, false);
-  }
+  final Map<String, bool> _tasks = {
+    'Cook Rice and Chicken at 10 a.m': false,
+    'Learn Reactjs at 12 p.m': false,
+    'Have Launch at 1 p.m': false,
+    'Learn HTML and CSS at 3 p.m': false,
+    'Have dinner at 7 p.m': false,
+  };
 
   void addTask() {
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Thêm công việc mới'),
           content: TextField(
@@ -55,6 +49,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           actions: [
             TextButton(
               onPressed: () {
+                _taskController.clear();
                 Navigator.pop(context);
               },
               child: const Text('Hủy'),
@@ -63,8 +58,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               onPressed: () {
                 if (_taskController.text.isNotEmpty) {
                   setState(() {
-                    tasks.add(_taskController.text);
-                    _checked.add(false); // thêm trạng thái tương ứng
+                    _tasks[_taskController.text] = false;
                   });
                   _taskController.clear();
                   Navigator.pop(context);
@@ -78,7 +72,11 @@ class _DashboardScreenState extends State<DashboardScreen> {
     );
   }
 
-  late List<bool> _checked;
+  @override
+  void dispose() {
+    _taskController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -195,53 +193,60 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                     Flexible(
                       child: ListView.separated(
+                        padding: EdgeInsets.symmetric(vertical: 10),
                         shrinkWrap: true,
-                        itemCount: tasks.length,
+                        itemCount: _tasks.length,
                         itemBuilder: (context, index) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(width: 21),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    _checked[index] = !_checked[index];
-                                  });
-                                },
-                                child: Container(
-                                  width: 17,
-                                  height: 17,
-                                  decoration: BoxDecoration(
-                                    color: _checked[index]
-                                        ? Color(0xFF50C2C9)
-                                        : Color(0xFFFFFFFF),
-                                    border: Border.all(
-                                      color: _checked[index]
+                          final task = _tasks.keys.elementAt(index);
+                          final isChecked = _tasks[task] ?? false;
+
+                          return Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 21),
+                            child: Row(
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _tasks[task] = !isChecked;
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 20,
+                                    height: 20,
+                                    decoration: BoxDecoration(
+                                      color: isChecked
                                           ? Color(0xFF50C2C9)
-                                          : Color(0xFF2B8E94),
-                                      width: 1,
+                                          : Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                        color: isChecked
+                                            ? Color(0xFF50C2C9)
+                                            : Color(0xFF2B8E94),
+                                        width: 2,
+                                      ),
                                     ),
+                                    child: isChecked
+                                        ? const Icon(
+                                            Icons.check,
+                                            size: 16,
+                                            color: Colors.white,
+                                          )
+                                        : null,
                                   ),
-                                  child: _checked[index]
-                                      ? Icon(Icons.check,
-                                          size: 14, color: Colors.white)
-                                      : SizedBox.shrink(),
                                 ),
-                              ),
-                              SizedBox(width: 8),
-                              Expanded(
-                                child: AppText(
-                                  title: tasks[index],
-                                  style: AppTextstyle.regularTsSize12Black,
-                                  textAlign: TextAlign.start,
+                                const SizedBox(width: 12),
+                                Expanded(
+                                  child: Text(
+                                    task,
+                                    style: AppTextstyle.regularTsSize12Black,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           );
                         },
-                        separatorBuilder: (context, index) {
-                          return SizedBox(height: 16);
-                        },
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 18),
                       ),
                     ),
                   ],
